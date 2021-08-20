@@ -11,7 +11,13 @@ import copy
 from threading import Event
 from robo_gym_server_modules.robot_server.grpc_msgs.python import robot_server_pb2
 import numpy as np
+
+from gazebo_msgs.msg import ModelStates
+
 class UrRosBridge:
+
+    def storeStates(self, data):
+        self.storeStates = data
 
     def __init__(self, real_robot=False, ur_model= 'ur10'):
 
@@ -30,6 +36,9 @@ class UrRosBridge:
         self.joint_position = dict.fromkeys(self.joint_names, 0.0)
         self.joint_velocity = dict.fromkeys(self.joint_names, 0.0)
         rospy.Subscriber("joint_states", JointState, self._on_joint_states)
+
+        # Subscribe to model states
+        rospy.Subscriber("gazebo/model_states", ModelStates, self.storeStates)
 
         # Robot control
         self.arm_cmd_pub = rospy.Publisher('env_arm_command', JointTrajectory, queue_size=1) # joint_trajectory_command_handler publisher
@@ -172,6 +181,16 @@ class UrRosBridge:
             raise ValueError
                     
         self.get_state_event.set()
+
+        # Append all model states to msg
+        for target in self.modelStates.name:
+            target_index = self.modelStates.name.index(target)
+            target_pose = self.modelStates.pose[target_index]
+            target_position = target_pose.position
+
+            state_dict[target + '_x'] = target_position.x
+            state_dict[target + '_y'] = target_position.y
+            state_dict[target + '_z'] = target_position.z
 
         # Create and fill State message
         msg = robot_server_pb2.State(state=state, state_dict=state_dict, success= True)

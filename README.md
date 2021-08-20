@@ -52,7 +52,7 @@ export ROS_DISTRO=noetic
 
 4. Create a workspace folder in the home folder of your PC and clone this repository
 ```sh
-mkdir -p $ROBOGYM_WS/src && cd $ROBOGYM_WS/src && git clone https://github.com/jr-robotics/robo-gym-robot-servers.git
+mkdir -p $ROBOGYM_WS/src && cd $ROBOGYM_WS/src && git clone https://github.com/tinhangchui/robo-gym-robot-servers.git
 ```
 
 
