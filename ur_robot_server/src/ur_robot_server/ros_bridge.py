@@ -17,7 +17,7 @@ from gazebo_msgs.msg import ModelStates
 class UrRosBridge:
 
     def storeStates(self, data):
-        self.storeStates = data
+        self.modelStates = data
 
     def __init__(self, real_robot=False, ur_model= 'ur10'):
 
