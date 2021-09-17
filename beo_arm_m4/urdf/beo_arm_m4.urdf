@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com)
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="beo_arm_m4">
+    <link name="world"/>
+
+    <joint name="world_base_joint" type="fixed">
+        <parent link="world"/>
+        <child link="dummy_ground"/>
+    </joint>
+
+    <link name="dummy_ground">
+        <inertial>
+            <origin xyz="0 0 -0.035" rpy="0 0 0" />
+            <mass value="1" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <geometry>
+                <box size="1 1 0.001" />
+            </geometry>
+        </visual>
+        
+        <collision>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <geometry>
+                <box size="1 1 0.001" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="dummy_ground_link_1" type="fixed">
+        <parent link="dummy_ground" />
+        <child link="link_1" />
+    </joint>
+  
+    <link name="link_1">
+        <inertial>
+            <origin xyz="-0.0385731163984192 -2.28362687350156E-18 -0.00524859501374039" rpy="0 0 0" />
+            <mass value="1" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_1.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_1.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="link_2">
+        <inertial>
+            <origin xyz="-0.0227815027756187 -4.6281880237975E-17 0.019" rpy="0 0 0" />
+            <mass value="1" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_2.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_2.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="joint_1" type="continuous">
+        <origin xyz="0 0 0.05" rpy="0 0 0.0029081091695893" />
+        <parent link="link_1" />
+        <child link="link_2" />
+        <axis xyz="0 0 1" />
+    </joint>
+
+    <link name="link_3">
+        <inertial>
+            <origin xyz="0.121 -0.0315164899121854 9.0205620750794E-17" rpy="0 0 0" />
+            <mass value="1" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_3.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_3.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="joint_2" type="continuous">
+        <origin xyz="0 0 0.019" rpy="3.14159265358979 -1.33277945223947 3.14159265358979" />
+        <parent link="link_2" />
+        <child link="link_3" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="link_4">
+        <inertial>
+            <origin xyz="6.81676937119846E-14 -1.21539063535625E-16 0.14258" rpy="0 0 0" />
+            <mass value="1" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_4.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_4.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="joint_3" type="continuous">
+        <origin xyz="0.242 0 0" rpy="-3.14159265358979 1.03 0" />
+        <parent link="link_3" />
+        <child link="link_4" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="link_5">
+        <inertial>
+            <origin xyz="0.0396521859530979 -0.0124327235015845 0.00083405314659353" rpy="0 0 0" />
+            <mass value="1" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_5.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/link_5.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="joint_4" type="continuous">
+        <origin xyz="0 0 0.28516" rpy="3.14159265358979 0.34 0" />
+        <parent link="link_4" />
+        <child link="link_5" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="hand">
+        <inertial>
+            <origin xyz="0.0886274662275076 -8.78203759713259E-18 0.00365476427426814" rpy="0 0 0" />
+            <mass value="1" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/hand.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://beo_arm_m4/meshes/hand.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="joint_5" type="fixed">
+        <origin xyz="0.106 0.000140000000003387 0.014" rpy="0 0 0" />
+        <parent link="link_5" />
+        <child link="hand" />
+        <axis xyz="0 0 0" />
+    </joint>
+
+    <!-- This explains sensor and plugin tages:
+          https://answers.gazebosim.org//question/20900/what-does-the-sensor-tag-do/ -->
+    <gazebo reference="link_1">
+        <sensor name='link_1_contact' type='contact'>
+            <update_rate> 50 </update_rate>
+            <always_on>true</always_on>
+            <contact>
+                <!-- This needs to match the name of collision tag name in SDF, see:
+                      https://www.programmersought.com/article/77743702580/ -->
+                <!-- Use this to generate SDF from URDF:
+                      gz sdf -p /my_urdf.urdf > /my_sdf.sdf -->
+                <collision>dummy_ground_fixed_joint_lump__link_1_collision_1</collision>
+            </contact>
+            <plugin name="ros_bumper_0" filename="libgazebo_ros_bumper.so">
+                <bumperTopicName>link1_collision</bumperTopicName>
+                <frameName>link_1</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="link_2">
+        <sensor name='link_2_contact' type='contact'>
+            <update_rate> 50 </update_rate>
+            <always_on>true</always_on>
+            <contact>
+                <collision>link_2_collision</collision>
+            </contact>
+            <plugin name="ros_bumper_1" filename="libgazebo_ros_bumper.so">
+                <bumperTopicName>link2_collision</bumperTopicName>
+                <frameName>link_2</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="link_3">
+        <sensor name='link_3_contact' type='contact'>
+            <update_rate> 50 </update_rate>
+            <always_on>true</always_on>
+            <contact>
+                <collision>link_3_collision</collision>
+            </contact>
+            <plugin name="ros_bumper_2" filename="libgazebo_ros_bumper.so">
+                <bumperTopicName>link3_collision</bumperTopicName>
+                <frameName>link_3</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="link_4">
+        <sensor name='link_4_contact' type='contact'>
+            <update_rate> 50 </update_rate>
+            <always_on>true</always_on>
+            <contact>
+                <collision>link_4_collision</collision>
+            </contact>
+            <plugin name="ros_bumper_3" filename="libgazebo_ros_bumper.so">
+                <bumperTopicName>link4_collision</bumperTopicName>
+                <frameName>link_4</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="link_5">
+        <sensor name='link_5_contact' type='contact'>
+            <update_rate> 50 </update_rate>
+            <always_on>true</always_on>
+            <contact>
+                <collision>link_5_collision</collision>
+            </contact>
+            <plugin name="ros_bumper_4" filename="libgazebo_ros_bumper.so">
+                <bumperTopicName>link5_collision</bumperTopicName>
+                <frameName>link_5</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="hand">
+        <sensor name='hand_contact' type='contact'>
+            <update_rate> 50 </update_rate>
+            <always_on>true</always_on>
+            <contact>
+                <collision>link_5_fixed_joint_lump__hand_collision_1</collision>
+            </contact>
+            <plugin name="ros_bumper_5" filename="libgazebo_ros_bumper.so">
+                <bumperTopicName>hand_link_collision</bumperTopicName>
+                <frameName>hand</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <transmission name="trans_joint_1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_1">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="joint_1_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="trans_joint_2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_2">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="joint_2_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="trans_joint_3">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_3">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="joint_3_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="trans_joint_4">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_4">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="joint_4_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <gazebo>
+        <self_collide>1</self_collide>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+</robot>
+

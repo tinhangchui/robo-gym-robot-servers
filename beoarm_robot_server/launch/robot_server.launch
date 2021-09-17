@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="gazebo_gui" default="true"/>
+  <arg name="rviz_gui" default="false"/>
+  <arg name="world_path" default="$(find beoarm_robot_server)/worlds"/>
+  <arg name="world_name" default="test.world"/>
+  <arg name="server_port" default="50051"/>
+  <arg name="object_model_names" default="[box100]"/>
+  <arg name="action_cycle_rate" default="20"/>
+
+  <param name="action_cycle_rate" value="$(arg action_cycle_rate)"/>
+
+  <!-- Launches gazebo simulation and controllers -->
+  <include file="$(find beo_arm_m4_config)/launch/gazebo.launch">
+    <arg name="gui"         value="$(arg gazebo_gui)"/>
+    <arg name="world_name"  value="$(arg world_path)/$(arg world_name)"/>
+  </include>
+
+  <!-- Publish joint states and robot TF -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+    <rosparam param="source_list">[/joint_states]</rosparam>
+  </node>
+
+  <!-- Publish target objects TF -->
+  <rosparam param="object_model_names" subst_value="True">$(arg object_model_names)</rosparam>
+  <node name="objects_tf" pkg="beoarm_robot_server" type="objects_tf.py">
+    <!-- update every 100ms -->
+    <param name="update_rate" value="1"></param>
+  </node>
+
+  <!-- Launches moveit support -->
+  <include file="$(find beo_arm_m4_config)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution" value="false"/>
+    <arg name="info" value="true"/>
+  </include>
+
+  <!-- Launches Rviz if needed -->
+  <include file="$(find beo_arm_m4_config)/launch/moveit_rviz.launch" if="$(arg rviz_gui)">
+    <arg name="rviz_config" value="$(find beo_arm_m4_config)/launch/moveit.rviz"/>
+  </include>
+
+  <!-- Launch Command Handler -->
+  <!-- This is optional, depending on how you wish to control your robot -->
+  <node name="joint_trajectory_command_handler" pkg="beoarm_robot_server" type="joint_trajectory_command_handler.py" respawn="false" output="screen"/>
+
+  <!--Launch gRPC server -->
+  <node name="robot_server" pkg="beoarm_robot_server" type="robot_server.py" respawn="false" output="screen">
+    <param name="server_port" value="$(arg server_port)"></param>
+    <param name="real_robot" value="false"></param>
+  </node>
+
+</launch>
+
