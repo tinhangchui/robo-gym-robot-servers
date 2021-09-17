@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: beo_arm_m4
+    relative_path: urdf/beo_arm_m4.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/beo_arm_m4.srdf
+  CONFIG:
+    author_name: Dummy Dum
+    author_email: dummy@dum.dum
+    generated_timestamp: 1626682935

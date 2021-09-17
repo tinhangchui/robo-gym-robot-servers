@@ -76,6 +76,7 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 catkin build
 pip3 install robo-gym-server-modules scipy numpy
 pip3 install --upgrade protobuf
+sudo apt install ros-noetic-moveit-resources-prbt-moveit-config
 ```
 
 6. Add the sourcing of ROS and the ROS workspace to your `.bashrc` file:
