@@ -17,6 +17,8 @@ from gazebo_msgs.srv import DeleteModel, SpawnModel
 from trajectory_msgs.msg import JointTrajectoryPoint, JointTrajectory
 from robo_gym_server_modules.robot_server.grpc_msgs.python import robot_server_pb2
 
+from gazebo_msgs.msg import ModelStates
+
 '''
 state_dict should look like this:
 [
@@ -59,6 +61,8 @@ manipulator_ctrlr_name = 'arm_controller'
 tf_lookup_attempts = 10
 
 class RosBridge:
+    def storeStates(self, data):
+        self.modelStates = data
 
     def __init__(self):
         # Event is clear while initialization or set_state is going on
@@ -72,6 +76,9 @@ class RosBridge:
         self.joint_position = dict.fromkeys(self.joint_names, 0.0)
         self.joint_velocity = dict.fromkeys(self.joint_names, 0.0)
         rospy.Subscriber("joint_states", JointState, self._on_joint_states)
+        
+        # Subscribe to model states
+        rospy.Subscriber("gazebo/model_states", ModelStates, self.storeStates)
 
         # Robot control
         self.arm_cmd_pub = rospy.Publisher('env_arm_command', JointTrajectory, queue_size=1) # joint_trajectory_command_handler publisher
@@ -148,7 +155,17 @@ class RosBridge:
         state_dict['in_collision'] = float(beoarm_collision)
 
         self.get_state_event.set()
+       
+        # Append all model states to msg
+        for target in self.modelStates.name:
+            target_index = self.modelStates.name.index(target)
+            target_pose = self.modelStates.pose[target_index]
+            target_position = target_pose.position
 
+            state_dict[target + '_x'] = target_position.x
+            state_dict[target + '_y'] = target_position.y
+            state_dict[target + '_z'] = target_position.z
+            
         # Create and fill State message
         msg = robot_server_pb2.State(state_dict=state_dict, success=True)
 
